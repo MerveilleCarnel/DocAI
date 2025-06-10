@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de Rendez-vous</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .details {
+            margin-bottom: 20px;
+        }
+
+        .details p {
+            margin: 5px 0;
+        }
+
+        .details strong {
+            font-weight: bold;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Confirmation de Rendez-vous</h2>
+        <div class="details">
+            <p><strong>Date du rendez-vous:</strong> {{ rendez_vous.date_heure }}</p>
+            <p><strong>Heure du rendez-vous:</strong> {{ rendez_vous.time }}</p>
+            <p><strong>Motif de consultation:</strong> {{ rendez_vous.motif }}</p>
+            <p><strong>Medecin:</strong> {{ rendez_vous.medecin }}</p>
+            <p><strong>Patient:</strong> {{ rendez_vous.patient }}</p>
+         </div>
+         <a href="{% url 'modifier_rendez_vous' rendez_vous.id %}">Modifier</a>
+         <a href="{% url 'annuler_rendez_vous' rendez_vous.id %}">Annuler</a>
+        
+      </div>
+</body>
+</html>

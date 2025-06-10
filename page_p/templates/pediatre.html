@@ -1,0 +1,250 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Listings</title>
+    <style>
+        body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.search-bar {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+}
+
+.search-bar input::placeholder {
+    color: #ddd;
+}
+
+.doctor-list {
+    padding: 20px;
+}
+
+.doctor-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer; /* Add a cursor for clickable effect */
+}
+
+.doctor-item:last-child {
+    border-bottom: none;
+}
+
+.doctor-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 15px;
+}
+
+.doctor-info {
+    flex-grow: 1;
+}
+
+.doctor-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.doctor-specialty {
+    color: #666;
+    font-size: 14px;
+}
+
+.doctor-details {
+    font-size: 12px;
+    color: #888;
+}
+
+.doctor-actions {
+    display: flex;
+    align-items: center;
+}
+
+.doctor-action {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.doctor-action:last-child {
+    margin-right: 0;
+}
+
+.doctor-action svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Style for the back button */
+.back-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.back-button svg {
+    width: 20px;
+    height: 20px;
+    fill: #333; /* Adjust color as needed */
+}
+
+/* Style for the more button */
+.more-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.more-button svg {
+    width: 20px;
+    height: 20px;
+    fill: #333; /* Adjust color as needed */
+}
+
+/* Style for the doctor action links */
+.doctor-action {
+    text-decoration: none;
+    color: inherit; /* Maintain default link color */
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="{% url 'chatbot' %}" class="back-button"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 5l-7 7 7 7"></path></svg></a>
+            <h2>Rechercher un médecin</h2>
+            <button class="more-button"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18h.682a2 2 0 0 1 1.932 1.868l.514.874a2 2 0 0 1-.141 2.857l-.837 1.532a2 2 0 0 1-2.857-.141l-.874-.514a2 2 0 0 1-1.868-1.932H12m0-9a2 2 0 0 1 1.932 1.868l.514.874a2 2 0 0 1-.141 2.857l-.837 1.532a2 2 0 0 1-2.857-.141l-.874-.514a2 2 0 0 1-1.868-1.932H12m0 9a2 2 0 0 0 1.932 1.868l.514.874a2 2 0 0 0-.141 2.857l-.837 1.532a2 2 0 0 0-2.857-.141l-.874-.514a2 2 0 0 0-1.868-1.932H12"></path></svg></button>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher un médecin, groups, sujets etc">
+        </div>
+        <div class="doctor-list">
+            <a href="{% url 'specialiste2' %}" class="doctor-item" data-doctor-id="DEMGNE">
+                <img src="{% static 'images/.jpg' %}" alt="Dr. MATCHINDA ROSE" class="doctor-avatar">
+                
+                <div class="doctor-info">
+                    <div class="doctor-name">Dr. MATCHINDA ROSE</div>
+                    <div class="doctor-specialty">PEDIATRE</div>
+                    <div class="doctor-details">N° d'ordre: 11666</div>
+                    <div class="doctor-details">10 ans Expérience 500 + Consultation</div>
+                </div>
+                <div class="doctor-actions">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+            <a href="medecin-waspito4.html" class="doctor-item" data-doctor-id="doc">
+                <img src="{% static 'images/.jpg' %}" alt="Dr. TADOUM RICHARD" class="doctor-avatar">
+                
+                <div class="doctor-info">
+                    <div class="doctor-name">Dr. TADOUM RICHARD</div>
+                    <div class="doctor-specialty">PEDIATRE</div>
+                    <div class="doctor-details">N° d'ordre: 12O04</div>
+                    <div class="doctor-details">2 ans Expérience 500+ Consultation</div>
+                </div>
+                <div class="doctor-actions">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+            <a href="{% url 'medecin1' %}" class="doctor-item" data-doctor-id="tazinya">
+                <img src="{% static 'images/.jpg' %}" alt="Dr. TAFAHA ARMAND" class="doctor-avatar">
+                
+                <div class="doctor-info">
+                    <div class="doctor-name">Dr. TAFAHA ARMAND</div>
+                    <div class="doctor-specialty">PEDIATRE</div>
+                    <div class="doctor-details">N° d'ordre: 8372</div>
+                    <div class="doctor-details">11 ans Expérience 500+ Consultation</div>
+                </div>
+                <div class="doctor-actions">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+            <a href="medecin-waspito7.html" class="doctor-item" data-doctor-id="waspito7">
+                <img src="{% static 'images/.jpg' %}" alt="Dr. KEUBOU JACQUELINE" class="doctor-avatar">
+                
+                <div class="doctor-info">
+                    <div class="doctor-name">Dr. KEUBOU JACQUELINE</div>
+                    <div class="doctor-specialty">PEDIATRE</div>
+                    <div class="doctor-details">N° d'ordre: 2256O05</div>
+                    <div class="doctor-details">13 ans Expérience 500+ Consultation</div>
+                </div>
+                <div class="doctor-actions">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+            <a href="{% url 'medecin2' %}" class="doctor-item" data-doctor-id="ngoula">
+                <img src="{% static 'images/.jpg' %}" alt="Dr. FOPA BERNARD" class="doctor-avatar">
+                <div class="doctor-info">
+                    <div class="doctor-name">Dr. FOPA BERNARD</div>
+                    <div class="doctor-specialty">pediatre</div>
+                    <div class="doctor-details">N° d'ordre: 10049</div>
+                </div>
+                <div class="doctor-actions">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script >
+        // Function to handle doctor clicks
+function handleDoctorClick(event) {
+    event.preventDefault(); // Prevent default link behavior
+    const doctorId = event.target.dataset.doctorId;
+
+    // Replace this with your actual logic to navigate to the doctor's page
+    console.log("You clicked on doctor:", doctorId);
+    // You would typically use:
+    // window.location.href = `doctor-${doctorId}.html`;
+    // Or, if you're using a JavaScript framework, you'd route to the corresponding component
+}
+
+// Add event listeners to the doctor action links
+const doctorActions = document.querySelectorAll('.doctor-action');
+doctorActions.forEach(action => {
+    action.addEventListener('click', handleDoctorClick);
+});
+    </script>
+    <a href="{% url 'chatbot' %}" class="btn btn-link">Retourner à la conversation</a>
+</body>
+</html>

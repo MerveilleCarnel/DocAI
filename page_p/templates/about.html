@@ -1,0 +1,123 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Médecin</title>
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #aba6a6;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .historique {
+            width: 200px;
+            height: 200px;
+            background-color: #C6F4D6; /* vert clair */
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        
+        .apercu {
+            width: 100px;
+            height: 30px;
+            background-color: #8BC34A; /* vert */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .choix-consultation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .generaliste, .specialiste {
+            width: 200px;
+            height: 50px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border: 5px solid #4CAF50;
+            border-radius: 500px;
+            background-color: #fff;
+            width: 300%;
+            margin-bottom: 50px;
+        }
+        
+        .generaliste:hover, .specialiste:hover {
+            background-color: #C6F4D6; /* vert clair */
+        }
+        
+        h2 {
+            margin-top: 50px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Ajout du style pour le header et le footer */
+       
+        
+        
+        footer {
+            background-color: #4CAF50; /* Example footer color */
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed; /* Keep the footer at the bottom */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+   
+    
+    <main>
+        
+        
+        <section class="section">
+            <h2>Avec qui souhaitez-vous consulter ?</h2>
+            <div class="choix-consultation" style="display: flex; justify-content: center;">
+                <a href="{% url 'generaliste' %}">
+                    <div class="generaliste">
+                        <i class="fas fa-user-md" style="color: #8BC34A;"></i>
+                        <span>Généraliste</span>
+                    </div>
+                </a>
+                <a href="{% url 'specialiste' %}" >
+                    <div class="specialiste">
+                        <i class="fas fa-stethoscope" style="color: #8BC34A;"></i>
+                        <span>Spécialiste</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 DocAI</p>
+    </footer>
+</body>
+</html>

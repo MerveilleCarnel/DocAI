@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>visualiser mes RENDEZ-VOUS</title>
+
+</head>
+<body>
+    
+
+
+h1>Mes rendez-vous</h1>
+<ul>
+    {% for rendez_vous in rendez_vous %}
+        <li>
+            <strong>Patient:</strong> {{ rendez_vous.patient }}<br>
+            <strong>medecin:</strong> {{ rendez_vous.medecin }}<br>
+            <strong>Date:</strong> {{ rendez_vous.date }}<br>
+            <strong>Heure:</strong> {{ rendez_vous.heure }}
+            <strong>motif:</strong> {{ rendez_vous.motif }}<br>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

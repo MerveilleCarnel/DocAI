@@ -1,0 +1,325 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+
+.ventricule-gauche {
+  position: absolute;
+  width: 50px;
+  height: 100px;
+  background-color: #800000;
+  border-radius: 50px 50px 0 0; /* Rounded top */
+  transition: width 0.5s ease-in-out; /* Add transition */
+}
+
+    .coeur {
+      position: fixed;
+      right: 0; /* Positionner à droite */
+      top: 70%;
+      transform: translateY(-50%);  /* Centrer verticalement */
+      width: 200px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: #f0f0f0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+
+        .input-area {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 18%;
+            background-color: #fff;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        textarea {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: none;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .user-message {
+            background-color: #f2f2f2; /* Couleur de fond pour les messages de l'utilisateur */
+            padding: 10px 15px;
+            border-radius: 5px;
+            align-self: flex-start;
+        }
+        
+        h2 {
+            color:#800000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .assistant-message {
+            background-color: #e0f2e0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            align-self: flex-end;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+button:hover {
+            background-color: #45a049;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .nav {
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between; /* Distribute space evenly */
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px; /* Space between links */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background-color: #f2f2f2;
+        }
+
+        .nav-links .icon {
+            margin-right: 5px; /* Space between icon and text */
+        }
+
+        .nav-links .icon i {
+            font-size: 1.2em; /* Increase icon size */
+        }
+
+        .nav-links .logo {
+            width: 80px;
+            height: auto;
+        }
+
+        /* Styles for the active link */
+        .nav-links a.active {
+            background-color: #ddd;
+        }
+
+        .notification-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff0000; /* Couleur rouge pour le badge */
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+    </style>
+    <title> ACCEUIL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    </head>
+<body>
+
+    <body>
+        <div class="coeur">
+          <div class="ventricule-gauche"></div>
+          <div class="ventricule-droit"></div>
+         
+          <div class="oreillette-gauche"></div>
+          <div class="oreillette-droite"></div>
+          <div class="valvule-mitrale"></div>
+          <div class="valvule-aortique"></div>
+          <div class="valvule-tricuspide"></div>
+          <div class="valvule-pulmonaire"></div>
+        </div>
+      
+    
+    <div class="nav">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'images/doc.jpg' %}" alt="DocAI" class="logo">
+            <span class="logo-text">DocAI</span>
+        </a>
+        <div class="nav-links">
+            <a href="{% url 'consulter' %}" class="nav-links">
+                <i class="icon fas fa-calendar-alt"></i>
+                Mes Rendez-vous
+            </a>
+            
+            <a href="{% url 'contact' %}" class="nav-links">
+                <i class="icon fas fa-file-medical-alt"></i>
+                consulter son dossier medical
+            </a>
+            
+            <a href="{% url 'parametre' %}" class="nav-links">
+                <i class="icon fas fa-cog"></i>
+                Paramètre
+            </a>
+
+            <a href="{% url 'profil' %}" class="nav-links">
+                <i class="icon fas fa-user"></i>
+                Mon Profil
+            </a>
+            <a href="{% url 'deconnexion' %}" class="nav-links">
+                <i class="icon fas fa-sign-out-alt"></i>
+                Déconnexion
+            </a>
+            <a href="#" class="nav-links">
+                <i class="icon fas fa-bell"></i>
+                <span class="notification-badge">5</span> <!-- Remplacez 5 par le nombre de notifications réel -->
+            </a>
+            <div class="notifications" id="notifications">
+                <!-- Les notifications seront affichées ici -->
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 >Bonjour, {{ user.username }} ! Je suis DocAI, votre assistant médical virtuel. De quoi avez-vous besoin aujourd'hui ?</h2>
+        <div id="conversation" style="overflow-y: auto;">
+            {% for message in conversation %}
+                {% if message.role == 'user' %}
+                    <div class="user-message">{{ message.content }}</div>
+                {% else %}
+                    <div class="assistant-message">{{ message.content }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="input-area">
+            <form action="{% url 'consultation' %}" method="POST">
+                {% csrf_token %}
+                <textarea name="user_input" rows="2" placeholder="Décrivez vos symptômes..."></textarea> <br>
+                <br> 
+    
+                <label for="file-input">
+                    <i class="fas fa-file-image"></i>
+                </label>
+                <input type="file" id="file-input" name="image" accept="image/*">
+        <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+    
+    <script> const ventriculeGauche = document.querySelector('.ventricule-gauche');
+        let pulsating = false;
+
+        function animerVentriculeGauche() {
+          if (pulsating) {
+            ventriculeGauche.style.width = '50px'; 
+            ventriculeGauche.style.height = '100px';
+          } else {
+            ventriculeGauche.style.width = '100px';
+            ventriculeGauche.style.height = '150px';
+          }
+          pulsating = !pulsating;
+        }
+        
+        // Appeler la fonction d'animation à intervalles réguliers
+        setInterval(animerVentriculeGauche, 1000);  
+        
+        
+        
+    // Stocker les notifications dans un tableau
+    let notifications = [
+        { id: 1, message: "Notification 1" },
+        { id: 2, message: "Notification 2" },
+        { id: 3, message: "Notification 3" },
+        // Ajoutez d'autres notifications ici
+    ];
+
+    // Mise à jour du nombre de notifications
+    function updateNotificationCount() {
+        let count = notifications.length;
+        document.getElementById("notification-count").innerText = count;
+    }
+
+    // Afficher les notifications
+    function showNotifications() {
+        let notificationsHTML = "";
+        notifications.forEach((notification) => {
+            notificationsHTML += `<div class="notification">${notification.message}</div>`;
+        });
+        document.getElementById("notifications").innerHTML = notificationsHTML;
+    }
+
+    // Ajouter une nouvelle notification
+    function addNotification(notification) {
+        notifications.push(notification);
+        updateNotificationCount();
+        showNotifications();
+    }
+
+    // Supprimer une notification
+    function removeNotification(id) {
+        notifications = notifications.filter((notification) => notification.id !== id);
+        updateNotificationCount();
+        showNotifications();
+    }
+
+    // Initialiser les notifications
+    updateNotificationCount();
+    showNotifications();
+
+       
+
+        
+        </script>
+</body>
+</html>

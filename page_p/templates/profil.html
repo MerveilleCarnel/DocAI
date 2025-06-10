@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+/* Bordure verte pour les inputs */
+.form-group input[type="text"], .form-group input[type="password"] {
+  border: 1px solid #34C759; /* Bordure verte */
+  border-radius: 10px;
+}
+
+/* Bordure verte pour le body */
+body {
+  border: 5px solid #34C759; /* Bordure verte */
+  border-radius: 200px;
+  background-image: url('nom_de_l_image.jpg');
+}
+
+  /* Police */
+  body {
+    font-family: Open Sans, sans-serif;
+  }
+
+  /* Couleurs */
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .form-group input[type="text"], .form-group input[type="password"] {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #29d113;
+    border-radius: 10px;
+  }
+
+  .form-group button[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .form-group button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+
+  /* Effets de transition */
+  .form-group {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .form-group:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Éléments de design */
+  .form-group::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #39d715;
+    margin-bottom: 20px;
+  }
+    
+
+     /* Style du formulaire de mise à jour des informations personnelles */
+#update-profile-form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 5px solid #26d408;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#update-profile-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#update-profile-form input[type="text"], #update-profile-form input[type="email"], #update-profile-form input[type="password"] {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+}
+
+#update-profile-form button[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#update-profile-form button[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+/* Style du bouton de suppression du compte */
+#delete-account-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: -50px; /* Ajout de cette ligne pour déplacer le bouton vers le haut */
+    
+}
+
+#delete-account-btn:hover {
+    background-color: #FF3737;
+}
+
+/* Style du modal de confirmation de suppression du compte */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+
+.modal-content button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #3e8e41;
+}
+    </style>
+    <title>Inscription</title>
+</head>
+<body>
+
+<!-- Formulaire de mise à jour des informations personnelles -->
+<form id="update-profile-form">
+     <h2>Mes informations personnelles</h2>
+     <div class="form-group">
+       <label for="username">Nom d'utilisateur :</label>
+       <input type="text" id="username" name="username" value="{{ user.username }}">
+     </div>
+     <div class="form-group">
+       <label for="password">Mot de passe :</label>
+       <input type="password" id="password" name="password">
+     </div>
+     <div class="form-group">
+       <label for="confirm-password">Confirmer le mot de passe :</label>
+       <input type="password" id="confirm-password" name="confirm-password">
+     </div>
+     <button type="submit">Mettre à jour</button>
+     <div id="update-success-message" style="display: none;">Vos informations personnelles ont été mises à jour avec succès !</div>
+   </form>
+ 
+ <!-- Bouton de suppression du compte -->
+ <button id="delete-account-btn">Supprimer mon compte</button>
+ 
+ <!-- Modal de confirmation de suppression du compte -->
+ <div id="delete-account-modal" class="modal">
+     <div class="modal-content">
+         <h2>Supprimer mon compte</h2>
+         <p>Êtes-vous sûr de vouloir supprimer votre compte ?</p>
+         <button id="delete-account-confirm-btn">Oui, supprimer mon compte</button>
+         <button id="delete-account-cancel-btn">Annuler</button>
+     </div>
+ </div>
+
+<script>
+     // Événement de soumission du formulaire de mise à jour des informations personnelles
+document.getElementById("update-profile-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    // Envoi de la requête AJAX pour mettre à jour les informations personnelles
+    fetch("/update-profile", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value,
+            confirm_password: document.getElementById("confirm-password").value
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Affichage du message de succès
+            document.getElementById("update-success-message").style.display = "block";
+            // Réinitialisation des champs du formulaire
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("confirm-password").value = "";
+        } else {
+            alert("Erreur lors de la mise à jour des informations personnelles !");
+        }
+    })
+    .catch(error => {
+        console.error("Erreur lors de la mise à jour des informations personnelles :", error);
+    });
+});
+
+
+// Événement de clic sur le bouton de suppression du compte
+document.getElementById("delete-account-btn").addEventListener("click", function() {
+    // Affichage du modal de confirmation de suppression du compte
+    document.getElementById("delete-account-modal").style.display = "block";
+});
+
+// Événement de clic sur le bouton de confirmation de suppression du compte
+document.getElementById("delete-account-confirm-btn").addEventListener("click", function() {
+    // Envoi de la requête AJAX pour supprimer le compte
+    fetch("/delete-account", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Votre compte a été supprimé avec succès !");
+            // Redirection vers la page de connexion
+            window.location.href = "/connexion";
+        } else {
+            alert("Erreur lors de la suppression du compte !");
+        }
+    })
+    .catch(error => {
+        console.error("Erreur lors de la suppression du compte :", error);
+    });
+});
+
+// Événement de clic sur le bouton d'annulation de suppression du compte
+document.getElementById("delete-account-cancel-btn").addEventListener("click", function() {
+    // Fermeture du modal de confirmation de suppression du compte
+    document.getElementById("delete-account-modal").style.display = "none";
+});
+
+
+
+</script>
+
+     <a href="{% url 'chatbot' %}" class="btn btn-link">Retourner à la conversation</a>
+   
+</body>
+</html>

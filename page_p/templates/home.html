@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultation</title>
+    <style>
+        body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+nav li {
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+}
+
+section {
+    background-color: #fff;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 5px solid #80c878; /* Bordure verte */
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.services-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.service {
+    width: 30%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.version-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+footer {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DocAI</h1>
+        <nav>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#ideologies">Idéologies</a></li>
+                <li><a href="#version">Version</a></li>
+                <li><a href="#adresse">Adresse</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="services">
+            <h2>Nos Services</h2>
+            <p>Découvrez les services médicaux intelligents que nous offrons.</p>
+            <div class="services-list">
+                <div class="service">
+                    <h3>Consultation à Distance</h3>
+                    <p>Prennez un Rendez-vous avec un médecin qualifié depuis le confort de votre foyer.</p>
+                </div>
+                <div class="service">
+                    <h3>Suivi Médical Personnalisé</h3>
+                    <p>Obtenez des rappels de médicaments, des conseils personnalisés et des analyses de vos données de santé.</p>
+                </div>
+                <div class="service">
+                    <h3>Diagnostic Précoce</h3>
+                    <p>Notre IA peut aider à identifier les problèmes de santé potentiels dès leur apparition et vous proposez des solutions fiables  .</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ideologies">
+            <h2>Nos Idéologies</h2>
+            <p>Découvrez les principes qui guident notre application.</p>
+            <ul>
+                <li>Soins axés sur le patient</li>
+                <li>Innovation technologique</li>
+                <li>Confidentialité et sécurité des données</li>
+                <li>Accès équitable aux soins de santé</li>
+            </ul>
+        </section>
+
+        <section id="adresse">
+            <h2>Nos contacts</h2>
+            <p>veuillez contacter le service client aux adresse suivants.</p>
+            <ul>
+                <li>Téléphone: 695906796/675335133</li>
+                <li>Email: makouganmerveille98@gmail.com </li>
+                <li>Nous sommes situé a mimboman yaounde cameroun</li>
+                
+            </ul>
+        </section>
+
+        <section id="version">
+            <h2>Version de l'Application</h2>
+            <p>Découvrez les dernières mises à jour et les fonctionnalités de notre application.</p>
+            <div class="version-info">
+                <h3>Version 1.0.0</h3>
+                <ul>
+                    <li>Nouvelles fonctionnalités de diagnostic</li>
+                    <li>Améliorations de l'interface utilisateur</li>
+                    <li>Corrections de bogues</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 DocAI</p>
+    </footer>
+
+    <script >
+// Ajoutez ici votre logique JavaScript pour les interactions avec l'interface utilisateur
+// Par exemple, vous pouvez ajouter des événements pour les clics sur les liens de navigation.
+
+// Fonction de défilement en douceur vers une section spécifique
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.scrollIntoView({ behavior: "smooth" });
+}
+
+// Attachez des événements de clic aux liens de navigation
+const navLinks = document.querySelectorAll("nav a");
+navLinks.forEach(link => {
+    link.addEventListener("click", event => {
+        event.preventDefault(); // Empêchez le lien de recharger la page
+        const sectionId = link.getAttribute("href");
+        scrollToSection(sectionId);
+    });
+});
+
+    </script>
+</body>
+</html>

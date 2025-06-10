@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface de Rendez-vous</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px; /* Augmenter le padding */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 700px;
+            text-align: center; /* Centrer le texte */
+        }
+
+        h1 {
+            margin-bottom: 30px; /* Augmenter la marge */
+        }
+
+        .menu-item {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 15px; /* Augmenter la marge */
+            cursor: pointer;
+            text-decoration: none;
+            display: block; /* Pour que les liens occupent toute la largeur */
+            width: 80%; /* Largeur maximale */
+            text-align: center; /* Centrer le texte */
+        }
+
+        .menu-item:hover {
+            background-color: #45a049;
+        }
+
+        .payment-methods {
+            display: none; /* Masqué par défaut */
+            margin-top: 30px; /* Augmenter la marge */
+        }
+
+        .payment-method {
+            margin-bottom: 15px; /* Augmenter la marge */
+        }
+
+        .payment-method img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Interface de Rendez-vous</h1>
+        <a href="{% url 'about' %}" class="menu-item" id="prendre-rendez-vous">Prendre rendez-vous</a>
+        <a href="#" class="menu-item" id="historique-rendez-vous">Consulter l'historique de mes rendez-vous</a>
+        <a href="#" class="menu-item" id="effectuer-paiement">Effectuer un paiement avant de prendre rendez-vous</a>
+
+        <div class="payment-methods" id="payment-methods">
+            <h2>Modes de paiement</h2>
+            <div class="payment-method">
+                <img src="https://www.orange.com/sites/orange.com/files/styles/1024x576/public/medias/image/orng_money.jpg?itok=zX4k9r6v" alt="Orange Money">
+                <a href="#">Orange Money</a>
+            </div>
+            <div class="payment-method">
+                <img src="https://www.mtn.cm/sites/default/files/styles/large/public/images/mobilmoney.png?itok=71lQzV9Z" alt="Mobile Money">
+                <a href="#">Mobile Money</a>
+            </div>
+            <div class="payment-method">
+                <img src="https://www.visa.com/dam/VCOM/global/images/logos/visa-logo.png" alt="Carte bancaire">
+                <a href="#">Carte bancaire</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const prendreRendezVousBtn = document.getElementById('prendre-rendez-vous');
+        const historiqueRendezVousBtn = document.getElementById('historique-rendez-vous');
+        const effectuerPaiementBtn = document.getElementById('effectuer-paiement');
+        const paymentMethodsDiv = document.getElementById('payment-methods');
+
+        prendreRendezVousBtn.addEventListener('click', () => {
+            // TODO: Implémenter la fonctionnalité de prise de rendez-vous
+            console.log('Prendre rendez-vous');
+        });
+
+        historiqueRendezVousBtn.addEventListener('click', () => {
+            // TODO: Implémenter la fonctionnalité de consultation de l'historique
+            console.log('Consulter historique');
+        });
+
+        effectuerPaiementBtn.addEventListener('click', () => {
+            // Afficher les options de paiement
+            paymentMethodsDiv.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

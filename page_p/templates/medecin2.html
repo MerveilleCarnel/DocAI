@@ -1,0 +1,386 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Medecin</title>
+    <style>
+
+.doctor-profile {
+  position: relative; /* ajout de position relative pour permettre la position absolue du bouton */
+}
+
+#modifierButton {
+  position: absolute;
+  top: 10px;
+  right: 150px; /* déplace le bouton à 10px du haut et de la droite du parent */
+}
+
+        .doctor-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 150px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #333333; /* ajout d'un fond clair */
+            
+        }
+
+        .profile-picture {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid #fff; /* ajout d'un bordure blanche */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* ajout d'une ombre légère */
+        }
+
+        .profile-info {
+            text-align: center;
+            color: #333; /* ajout d'une couleur de texte plus sombre */
+        }
+
+        .profile-info h2 {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: hsl(210, 24%, 90%); /* ajout d'une couleur de titre plus vive */
+        }
+
+        .profile-info p {
+            margin-bottom: 10px;
+            font-size: 16px; /* augmentation de la taille de police */
+            color: hsl(210, 24%, 90%);
+        }
+
+        /* ajout d'un effet de hover sur la photo de profil */
+        .profile-picture:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .formulaire {
+            display: none; /* formulaire caché par défaut */
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        .formulaire input, .formulaire textarea {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .formulaire button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .formulaire button:hover {
+            background-color: #3e8e41;
+        }
+
+        .additional-info {
+  margin-top: 20px; /* add some space between the profile info and additional info */
+  padding: 20px;
+  border: 5px solid #333333;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  
+}
+
+.horaires {
+  margin-bottom: 20px;
+}
+
+.horaires table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.horaires th, .horaires td {
+  border: 1px solid #333333;  
+  padding: 10px;
+  text-align: left;
+}
+
+.horaires th {
+  background-color: #4CAF50;
+}
+.description {
+  margin-bottom: 20px;
+}
+
+.description p {
+  margin-bottom: 30px;
+}
+
+.experience-patients {
+  margin-bottom: 20px;
+}
+
+.experience-patients-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px;
+  border: 5px solid #4CAF50;
+  border-radius: 500px;
+  background-color: #f9f9f9;
+  width: 50%;
+
+}
+
+.experience, .patients {
+  flex: 1;
+  margin: 10px;
+}
+
+.experience p, .patients p {
+  margin-bottom: 5px;
+}
+
+#prendre-rendez-vous {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#prendre-rendez-vous:hover {
+  background-color: #3e8e41;
+}
+.notification-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff0000; /* Couleur rouge pour le badge */
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+.green-icon {
+  color: green;
+}
+
+    </style>
+</head>
+<body>
+    <div class="doctor-profile">
+        <img src="{% static 'images/moi 4.jpg' %}" alt="Photo de profil du médecin" class="profile-picture">
+        <div class="profile-info">
+            <h2 id="nom">Dr. TCHEPZE LEA </h2> 
+            <p id="specialite">Spécialité : GENERALISTE</p>
+            <p id="numeroOrdre">N° d'ordre : 10049</p>
+        </div>
+        <button id="prendre-rendez-vous"><i class="fas fa-calendar-plus"></i> <a href="{% url 'rendezvous' %}">Prendre rendez-vous</a></button>
+        
+        
+        <button id="modifierButton">Modifier profil</button> <!-- bouton modifier profil -->
+    </div>
+    
+
+    <div class="formulaire" id="formulaire"> <!-- formulaire caché par défaut -->
+        <h2>Modifier le profil</h2>
+        <input type="text" id="nomInput" placeholder="Nom">
+        <input type="text" id="specialiteInput" placeholder="Spécialité">
+        <input type="text" id="numeroOrdreInput" placeholder="N° d'ordre">
+        <input type="file" id="photoInput" accept="image/*"> 
+        <button id="validerButton">Valider</button>
+    </div>
+    <div class="additional-info">
+        <a href="#" class="nav-links">
+            <i class="icon fas fa-bell"></i>
+            <span class="notification-badge">7</span> <!-- Remplacez 5 par le nombre de notifications réel -->
+        </a>
+  <h2>Horaires de disponibilité </h2>
+  <section class="horaires">
+    <table id="horaires-table">
+      <thead>
+        <tr>
+          <th>Jour</th>
+          <th>Heures</th>
+        </tr>
+      </thead>
+      <tbody id="horaires-list">
+        
+        <tr>
+          <td>Mardi</td>
+          <td>14h-17h</td>
+        </tr>
+        <tr>
+            <td>Mercredi</td>
+            <td>08h-14h</td>
+          </tr>
+          <tr>
+            <td>Jeudi</td>
+            <td>12h-17h</td>
+          </tr>
+          <tr>
+            <td>Vendredi</td>
+            <td>10h-17h</td>
+          </tr>
+        <!-- add more days as needed -->
+      </tbody>
+    </table>
+  </section>
+ 
+  <section class="experience-patients">
+    <h3>Expérience et patients :</h3>
+    <div class="experience-patients-bar">
+      <div class="experience">
+        <p>Années d'expérience :</p>
+        <span id="experience-count">5 ans  </span>
+      </div>
+      <div class="patients">
+        <p>Patients consultés :</p>
+        <span id="patients-count">200+</span>
+        
+      </div>
+    </div>
+  </section>
+
+  <p id="adresse"><i class="fas fa-map-marker-alt green-icon"></i> Adresse : <span id="adresse-text"> bonaberi douala </span></p>
+<p id="hopital"><i class="fas fa-hospital-alt green-icon"></i> Hôpital : <span id="hopital-text">adlucem de bonaberi</span></p>
+<button id="prendre-rendez-vous"><i class="fas fa-calendar-plus"></i> <a href="{% url 'dossier_medical' %}">GERER DOSSIER MEDICAL PATIENT</a></button>
+</div>
+
+
+<div class="tabs">
+  <a href="{% url 'parametre' %}" class="menu-item" id="prendre-rendez-vous">parametre</a>
+  <a href="{% url 'home' %}" class="menu-item" id="prendre-rendez-vous">A propos</a>
+  <a href="{% url 'visualiser' %}" class="menu-item" id="historique-rendez-vous">mes rendez-vous </a>
+  <a href="#" class="menu-item" id="effectuer-paiement">mes reclamations</a>
+  <a href="{% url 'deconnexion' %}" class="nav-links">
+    <i class="icon fas fa-sign-out-alt"></i>
+    Déconnexion
+</a>   
+
+</div>
+
+<div class="tab-content active" id="parametres">
+  <!-- Contenu de l'onglet Paramètres -->
+  <h2>Paramètres</h2>
+  <p>Modifiez vos informations personnelles ici.</p>
+</div>
+
+
+
+
+
+    <script>
+        const modifierButton = document.getElementById('modifierButton');
+const formulaire = document.getElementById('formulaire');
+const nomInput = document.getElementById('nomInput');
+const specialiteInput = document.getElementById('specialiteInput');
+const numeroOrdreInput = document.getElementById('numeroOrdreInput');
+const validerButton = document.getElementById('validerButton');
+const nom = document.getElementById('nom');
+const specialite = document.getElementById('specialite');
+const numeroOrdre = document.getElementById('numeroOrdre');
+
+modifierButton.addEventListener('click', () => {
+  formulaire.style.display = 'flex'; // afficher le formulaire de modification
+});
+
+validerButton.addEventListener('click', () => {
+  const newNom = nomInput.value;
+  const newSpecialite = specialiteInput.value;
+  const newNumeroOrdre = numeroOrdreInput.value;
+  const newPhoto = photoInput.files[0]; // récupération du fichier de la nouvelle photo de profil
+
+  // Mettre à jour les éléments du profil
+  nom.textContent = `Dr. ${newNom}`;
+  specialite.textContent = `Spécialité : ${newSpecialite}`;
+  numeroOrdre.textContent = `N° d'ordre : ${newNumeroOrdre}`;
+
+  // Mettre à jour la photo de profil
+  const profilePicture = document.querySelector('.profile-picture');
+  const reader = new FileReader();
+  reader.onload = () => {
+    profilePicture.src = reader.result;
+  };
+  reader.readAsDataURL(newPhoto);
+
+  // Stocker les nouvelles informations dans un objet
+  const profil = {
+    nom: newNom,
+    specialite: newSpecialite,
+    numeroOrdre: newNumeroOrdre,
+    photo: newPhoto // stockage de la nouvelle photo de profil
+  };
+
+  // Stocker les informations dans un système de stockage de données (par exemple, un serveur ou un stockage local)
+  // Pour cet exemple, nous allons utiliser le stockage local
+  localStorage.setItem('profil', JSON.stringify(profil));
+
+  formulaire.style.display = 'none'; // cacher le formulaire de modification
+});
+
+// Si des informations sont disponibles dans le stockage local, les utiliser pour remplir le profil
+if (storedProfil) {
+  const profil = JSON.parse(storedProfil);
+  nom.textContent = `Dr. ${profil.nom}`;
+  specialite.textContent = `Spécialité : ${profil.specialite}`;
+  numeroOrdre.textContent = `N° d'ordre : ${profil.numeroOrdre}`;
+  // Charger la photo de profil si elle est disponible
+  if (profil.photo) {
+    const profilePicture = document.querySelector('.profile-picture');
+    const reader = new FileReader();
+    reader.onload = () => {
+      profilePicture.src = reader.result;
+    };
+    reader.readAsDataURL(profil.photo);
+  }
+} else {
+  // Si aucune information n'est disponible dans le stockage local, utiliser des informations par défaut
+  nom.textContent = `Dr. DEMGNE ORNELLA`;
+  specialite.textContent = `Spécialité : GENERALISTE`;
+  numeroOrdre.textContent = `N° d'ordre : 11666`;
+}
+
+const horairesList = document.getElementById('horaires-list');
+const experienceCount = document.getElementById('experience-count');
+const patientsCount = document.getElementById('patients-count');
+
+// populate the horaires table
+const horaires = [
+  { day: 'Lundi', hours: '9h-12h' },
+  { day: 'Mardi', hours: '14h-17h' },
+  // add more days as needed
+];
+horaires.forEach((horaire) => {
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td>${horaire.day}</td>
+    <td>${horaire.hours}</td>
+  `;
+  horairesList.appendChild(row);
+});
+
+// populate the experience and patients counts
+experienceCount.textContent = '5';
+patientsCount.textContent = '200+';
+
+        </script>
+        <a href="{% url 'chatbot' %}" class="btn btn-link">Retourner à la conversation</a>
+        </body>
+        </html>

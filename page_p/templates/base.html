@@ -1,0 +1,61 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="{% static 'page_p/css/bootstrap.css' %}">
+    <title> acceuil </title>
+    <style type="text/css">
+        header {
+    display: flex; /* Arrange links horizontally */
+    justify-content: space-between; /* Distribute links evenly */
+    align-items: center; /* Vertically align links */
+    padding: 1rem 2rem; /* Add some padding */
+    background-color: #22cba4; /* Light background color */
+    border-bottom: 1px solid #ccc; /* Simple border */
+  }
+  
+  header a {
+    color: #333; /* Link text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold links for emphasis */
+    padding: 0.5rem 1rem; /* Add some padding for spacing */
+  }
+  
+  header a:hover { /* Hover effect for links */
+    color: #007bff; /* Change link color on hover */
+    background-color: #e0e0e0; /* Subtle background change */
+  }
+  
+  /* Optional: Style current link for visual feedback */
+  
+  header a.active {
+    color: #fff; /* White text for selected link */
+    background-color: #007bff; /* Blue background for selected link */
+  }
+  
+    </style>
+
+</head>
+<body>
+
+<header>
+    <a href="{% url 'home' %}">HOME</a> |
+    <a href="{% url 'about' %}">RENDEZ-VOUS</a>
+    <a href="{% url 'contact' %}">DOSSIER MEDICALE</a>
+    <a href="{% url 'reclammation' %}">RECLAMMATION</a>
+
+    <a href="{% url 'parametre' %}">PARAMETRE</a>
+    <a href="{% url 'deconnexion' %}">DECONNEXION</a>
+
+
+    
+   </header> 
+   {% block content %} {% endblock content %}
+
+   <script src="{% static 'page_p/js/bootstrap.js'%}"></script>
+   <script src="{% static 'page_p/js/jquery.js'%}"></script>
+   <script src="{% static 'page_p/js/popper.js'%}"></script>
+</body>
+</html>
+
